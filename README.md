@@ -5,7 +5,8 @@
 </div>
 
 ## Planning for MusicTube:
-- Change UI with Bottoms Buttoms
+- Change UI with BottomBars
+- Multi language, songs by location
 - Intergrate youtube floater player and play video on youtube
 - Cache music, video to play offline
 - Scan, play local music
