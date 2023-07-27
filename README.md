@@ -4,7 +4,7 @@
     <p>An Android application for streaming music from YouTube Music and Video from Youtube</p>
 </div>
 
-##Planning for MusicTube:
+## Planning for MusicTube:
 - Change UI with Bottoms Buttoms
 - Intergrate youtube floater player and play video on youtube
 - Cache music, video to play offline
