@@ -11,7 +11,7 @@
 - Cache music, video to play offline
 - Scan, play local music
 
-Feel free to join and commit your code!
+Feel free to join, create your branch and commit your code!
 
 ---
 
