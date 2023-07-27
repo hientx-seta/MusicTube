@@ -1,8 +1,16 @@
 <div align="center">
     <img src="./app/src/main/ic_launcher-playstore.png" width="128" height="128" style="display: block; margin: 0 auto"/>
-    <h1>ViMusic</h1>
-    <p>An Android application for streaming music from YouTube Music</p>
+    <h1>MusicTube</h1>
+    <p>An Android application for streaming music from YouTube Music and Video from Youtube</p>
 </div>
+
+##Planning for MusicTube:
+- Change UI with Bottoms Buttoms
+- Intergrate youtube floater player and play video on youtube
+- Cache music, video to play offline
+- Scan, play local music
+
+Feel free to join and commit your code!
 
 ---
 
