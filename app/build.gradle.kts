@@ -46,6 +46,7 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        viewBinding = true
     }
 
     compileOptions {
@@ -61,10 +62,15 @@ android {
     kotlinOptions {
         freeCompilerArgs += "-Xcontext-receivers"
         jvmTarget = "17"
+
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    kotlin {
+        jvmToolchain(17)
+    }
+
+    lint {
+        lintConfig = file("lint.xml")
     }
 }
 
@@ -98,4 +104,9 @@ dependencies {
     implementation(projects.kugou)
 
     coreLibraryDesugaring(libs.desugaring)
+
+    //    implementation(libs.compose.preview)
+    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
+    implementation("androidx.compose.material3:material3:1.1.1")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.1")
 }
