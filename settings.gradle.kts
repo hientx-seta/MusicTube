@@ -58,7 +58,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ViMusic"
+rootProject.name = "MusicTube"
 include(":app")
 include(":compose-routing")
 include(":compose-reordering")

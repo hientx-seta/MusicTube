@@ -8,7 +8,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "it.vfsfitvnm.vimusic"
+        applicationId = "pro.mobiledev.musictube"
         minSdk = 21
         targetSdk = 33
         versionCode = 20
@@ -22,18 +22,18 @@ android {
         }
     }
 
-    namespace = "it.vfsfitvnm.vimusic"
+    namespace = "pro.mobiledev.musictube"
 
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
-            manifestPlaceholders["appName"] = "Debug"
+            manifestPlaceholders["appName"] = "MusicTube"
         }
 
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            manifestPlaceholders["appName"] = "ViMusic"
+            manifestPlaceholders["appName"] = "MusicTube"
             signingConfig = signingConfigs.getByName("debug")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
