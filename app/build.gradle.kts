@@ -45,12 +45,13 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     composeOptions {
@@ -59,7 +60,11 @@ android {
 
     kotlinOptions {
         freeCompilerArgs += "-Xcontext-receivers"
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 
