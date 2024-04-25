@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ripple.rememberRipple
@@ -27,7 +28,6 @@ import pro.mobiledev.compose.persist.persist
 import pro.mobiledev.innertube.Innertube
 import pro.mobiledev.innertube.models.bodies.BrowseBody
 import pro.mobiledev.innertube.requests.playlistPage
-import pro.mobiledev.compose.reordering.ReorderingLazyColumn
 import pro.mobiledev.compose.reordering.animateItemPlacement
 import pro.mobiledev.compose.reordering.draggedItem
 import pro.mobiledev.compose.reordering.rememberReorderingState
@@ -136,8 +136,8 @@ fun LocalPlaylistSongs(
     val rippleIndication = rememberRipple(bounded = false)
 
     Box {
-        ReorderingLazyColumn(
-            reorderingState = reorderingState,
+        LazyColumn(
+            state = reorderingState.lazyListState,
             contentPadding = LocalPlayerAwareWindowInsets.current
                 .only(WindowInsetsSides.Vertical + WindowInsetsSides.End).asPaddingValues(),
             modifier = Modifier

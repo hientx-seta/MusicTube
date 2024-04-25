@@ -2,6 +2,7 @@ package pro.mobiledev.musictube.ui.screens.player
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -29,6 +30,7 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -53,7 +55,6 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.Timeline
 import com.valentinilk.shimmer.shimmer
-import pro.mobiledev.compose.reordering.ReorderingLazyColumn
 import pro.mobiledev.compose.reordering.animateItemPlacement
 import pro.mobiledev.compose.reordering.draggedItem
 import pro.mobiledev.compose.reordering.rememberReorderingState
@@ -187,8 +188,8 @@ fun Queue(
                     .background(colorPalette.background1)
                     .weight(1f)
             ) {
-                ReorderingLazyColumn(
-                    reorderingState = reorderingState,
+                LazyColumn(
+                    state = reorderingState.lazyListState,
                     contentPadding = windowInsets
                         .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
                         .asPaddingValues(),
@@ -368,7 +369,7 @@ fun Queue(
                     AnimatedContent(
                         targetState = queueLoopEnabled,
                         transitionSpec = {
-                            val slideDirection = if (targetState) AnimatedContentScope.SlideDirection.Up else AnimatedContentScope.SlideDirection.Down
+                            val slideDirection = if (targetState) AnimatedContentTransitionScope.SlideDirection.Up else AnimatedContentTransitionScope.SlideDirection.Down
 
                             ContentTransform(
                                 targetContentEnter = slideIntoContainer(slideDirection) + fadeIn(),
