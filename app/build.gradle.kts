@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -12,7 +13,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 20
-        versionName = "0.5.4"
+        versionName = "1.0.0-beta2"
     }
 
     splits {
@@ -26,7 +27,7 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix = ".debug"
+//            applicationIdSuffix = ".debug"
             manifestPlaceholders["appName"] = "MusicTube"
         }
 
@@ -104,6 +105,9 @@ dependencies {
     implementation(projects.kugou)
 
     coreLibraryDesugaring(libs.desugaring)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 
     //    implementation(libs.compose.preview)
     debugImplementation("androidx.compose.ui:ui-tooling:1.6.6")

@@ -46,10 +46,18 @@ dependencyResolutionManagement {
             library("ktor-serialization-json", "io.ktor", "ktor-serialization-kotlinx-json").versionRef("ktor")
 
             library("brotli", "org.brotli", "dec").version("0.1.2")
-
             library("palette", "androidx.palette", "palette").version("1.0.0")
-
             library("desugaring", "com.android.tools", "desugar_jdk_libs").version("1.1.5")
+
+
+            version("firebase-version", "32.8.0")
+            library("firebase-bom", "com.google.firebase", "firebase-bom").versionRef("firebase-version")
+            library("firebase-analytics", "com.google.firebase", "firebase-analytics").version("21.6.2")
+        }
+
+        create("plugin") {
+            version("google-services-version", "4.4.1")
+            library("firebase-analytics", "com.google.gms.google-services", "firebase-analytics").versionRef("google-services-version")
         }
 
         create("testLibs") {

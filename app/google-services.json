@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "222789739751",
+    "project_id": "musictube-3ccd2",
+    "storage_bucket": "musictube-3ccd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222789739751:android:bb9ea6d0de8b05416a6e42",
+        "android_client_info": {
+          "package_name": "pro.mobiledev.musictube"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUycWLkot2EPYSHYagzlEVbOBN60oXlaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
