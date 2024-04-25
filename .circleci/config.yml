@@ -30,9 +30,11 @@ jobs:
           path: app/build/outputs/
           destination: build_outputs
       - run:
-         name: Install Firebase CLI
-         command: |
-           curl -sL https://firebase.tools | bash
+          name: Install Firebase CLI
+          command: |
+            curl -sL https://firebase.tools | bash
+            echo 'export PATH="$PATH:/home/circleci/.npm-global/bin"' >> $BASH_ENV
+            source $BASH_ENV
       - run:
           name: Authenticate with Firebase
           command: echo $FIREBASE_TOKEN | firebase login:ci --token
