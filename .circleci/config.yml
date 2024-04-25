@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: circleci/android@1.0.3  # Using Android orb to simplify setup
+  android: circleci/android@2.0.0  # Ensure to use a recent version of the Android orb
 
 jobs:
   build:
@@ -9,30 +9,24 @@ jobs:
       - image: cimg/android:2023.04  # Docker image with Android environment
     steps:
       - checkout  # Checks out the source code
-      - android/setup  # Sets up the Android environment
-      - run:
-          name: Restore Cache
-          command: |
-            if [ -e ~/.gradle/caches ]; then
-                mkdir -p /home/circleci/.gradle
-                cp -r ~/.gradle/caches /home/circleci/.gradle/caches
-            fi
       - restore_cache:
-          key: gradle-cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+          keys:
+            - gradle-cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+            - gradle-cache-
       - run:
-          name: Run Gradle Dependencies
+          name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: gradle-cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ epoch }}
       - run:
+          name: Run Tests
+          command: ./gradlew test
+      - run:
           name: Build
           command: ./gradlew assembleDebug  # Adjust this command based on your project's specific build requirements
-      - run:
-          name: Run Tests
-          command: ./gradlew test  # Runs unit tests
-      - store_artifacts:  # Optional: Store the build outputs for later use
+      - store_artifacts:
           path: app/build/outputs/
           destination: build_outputs
 
