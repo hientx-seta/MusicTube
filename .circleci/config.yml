@@ -14,9 +14,6 @@ jobs:
             - gradle-cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
             - gradle-cache-
       - run:
-          name: Set up JDK 11
-          command: sudo update-alternatives --set javac /usr/lib/jvm/java-11-openjdk-amd64/bin/javac
-      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
