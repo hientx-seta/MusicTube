@@ -1,6 +1,7 @@
 package pro.mobiledev.compose.routing
 
 import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -30,17 +31,17 @@ val defaultStill = ContentTransform(
 )
 
 @ExperimentalAnimationApi
-inline val AnimatedContentScope<RouteHandlerScope>.isStacking: Boolean
+inline val AnimatedContentTransitionScope<RouteHandlerScope>.isStacking: Boolean
     get() = initialState.route == null && targetState.route != null
 
 @ExperimentalAnimationApi
-inline val AnimatedContentScope<RouteHandlerScope>.isUnstacking: Boolean
+inline val AnimatedContentTransitionScope<RouteHandlerScope>.isUnstacking: Boolean
     get() = initialState.route != null && targetState.route == null
 
 @ExperimentalAnimationApi
-inline val AnimatedContentScope<RouteHandlerScope>.isStill: Boolean
+inline val AnimatedContentTransitionScope<RouteHandlerScope>.isStill: Boolean
     get() = initialState.route == null && targetState.route == null
 
 @ExperimentalAnimationApi
-inline val AnimatedContentScope<RouteHandlerScope>.isUnknown: Boolean
+inline val AnimatedContentTransitionScope<RouteHandlerScope>.isUnknown: Boolean
     get() = initialState.route != null && targetState.route != null

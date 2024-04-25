@@ -8,12 +8,11 @@ import androidx.compose.foundation.lazy.grid.LazyGridLayoutInfo
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.util.fastForEach
-import androidx.compose.ui.util.fastSumBy
 
-fun Density.calculateDistanceToDesiredSnapPosition(
+fun calculateDistanceToDesiredSnapPosition(
     layoutInfo: LazyGridLayoutInfo,
     item: LazyGridItemInfo,
-    positionInLayout: Density.(layoutSize: Float, itemSize: Float) -> Float
+    positionInLayout: (layoutSize: Float, itemSize: Float) -> Float
 ): Float {
     val containerSize =
         with(layoutInfo) { singleAxisViewportSize - beforeContentPadding - afterContentPadding }
@@ -30,7 +29,7 @@ private val LazyGridLayoutInfo.singleAxisViewportSize: Int
 @ExperimentalFoundationApi
 fun SnapLayoutInfoProvider(
     lazyGridState: LazyGridState,
-    positionInLayout: Density.(layoutSize: Float, itemSize: Float) -> Float =
+    positionInLayout: (layoutSize: Float, itemSize: Float) -> Float =
         { layoutSize, itemSize -> (layoutSize / 2f - itemSize / 2f) }
 ): SnapLayoutInfoProvider = object : SnapLayoutInfoProvider {
 
@@ -38,9 +37,9 @@ fun SnapLayoutInfoProvider(
         get() = lazyGridState.layoutInfo
 
     // Single page snapping is the default
-    override fun Density.calculateApproachOffset(initialVelocity: Float): Float = 0f
+    override fun calculateApproachOffset(initialVelocity: Float): Float = 0f
 
-    override fun Density.calculateSnappingOffsetBounds(): ClosedFloatingPointRange<Float> {
+    override fun calculateSnappingOffset(currentVelocity: Float): Float {
         var lowerBoundOffset = Float.NEGATIVE_INFINITY
         var upperBoundOffset = Float.POSITIVE_INFINITY
 
@@ -59,14 +58,14 @@ fun SnapLayoutInfoProvider(
             }
         }
 
-        return lowerBoundOffset.rangeTo(upperBoundOffset)
+        return if ((lowerBoundOffset * -1f) > upperBoundOffset) upperBoundOffset else lowerBoundOffset
     }
 
-    override fun Density.calculateSnapStepSize(): Float = with(layoutInfo) {
-        if (visibleItemsInfo.isNotEmpty()) {
-            visibleItemsInfo.fastSumBy { it.size.width } / visibleItemsInfo.size.toFloat()
-        } else {
-            0f
-        }
-    }
+//    override fun Density.calculateSnapStepSize(): Float = with(layoutInfo) {
+//        if (visibleItemsInfo.isNotEmpty()) {
+//            visibleItemsInfo.fastSumBy { it.size.width } / visibleItemsInfo.size.toFloat()
+//        } else {
+//            0f
+//        }
+//    }
 }

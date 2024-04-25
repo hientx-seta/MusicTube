@@ -16,9 +16,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.valentinilk.shimmer.shimmer
 import pro.mobiledev.musictube.ui.styling.Dimensions
 import pro.mobiledev.musictube.ui.styling.LocalAppearance
@@ -115,8 +118,28 @@ private fun HeaderPlaceholderPreview() {
 private fun HeaderPreview() {
     Header("title: String")
 }
-
+@Preview
 @Composable
 private fun TestText() {
-    Text("Test")
+    Text("TextOnly")
+    Box(
+        contentAlignment = Alignment.CenterEnd,
+        modifier = Modifier.shimmer()
+            .padding(horizontal = 16.dp)
+            .height(200.dp)
+            .fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier
+                .background(Color.Blue)
+                .fillMaxWidth(remember { 0.25f + 100 * 0.5f })
+        ) {
+            BasicText(
+                text = "Test",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = TextStyle(fontSize = 50.sp)
+            )
+        }
+    }
 }

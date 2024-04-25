@@ -41,6 +41,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.Timeline
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.database.StandaloneDatabaseProvider
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DefaultHttpDataSource
@@ -56,6 +57,7 @@ import androidx.media3.exoplayer.analytics.AnalyticsListener
 import androidx.media3.exoplayer.analytics.PlaybackStats
 import androidx.media3.exoplayer.analytics.PlaybackStatsListener
 import androidx.media3.exoplayer.audio.AudioRendererEventListener
+import androidx.media3.exoplayer.audio.DefaultAudioOffloadSupportProvider
 import androidx.media3.exoplayer.audio.DefaultAudioSink
 import androidx.media3.exoplayer.audio.DefaultAudioSink.DefaultAudioProcessorChain
 import androidx.media3.exoplayer.audio.MediaCodecAudioRenderer
@@ -118,7 +120,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
 
-@Suppress("DEPRECATION")
+@UnstableApi @Suppress("DEPRECATION")
 class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListener.Callback,
     SharedPreferences.OnSharedPreferenceChangeListener {
     private lateinit var mediaSession: MediaSession
@@ -619,21 +621,21 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
         }
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             persistentQueueKey -> isPersistentQueueEnabled =
-                sharedPreferences.getBoolean(key, isPersistentQueueEnabled)
+                sharedPreferences?.getBoolean(key, isPersistentQueueEnabled) ?: false
 
             volumeNormalizationKey -> maybeNormalizeVolume()
 
             resumePlaybackWhenDeviceConnectedKey -> maybeResumePlaybackWhenDeviceConnected()
 
             isInvincibilityEnabledKey -> isInvincibilityEnabled =
-                sharedPreferences.getBoolean(key, isInvincibilityEnabled)
+                sharedPreferences?.getBoolean(key, isInvincibilityEnabled) ?: false
 
-            skipSilenceKey -> player.skipSilenceEnabled = sharedPreferences.getBoolean(key, false)
+            skipSilenceKey -> player.skipSilenceEnabled = sharedPreferences?.getBoolean(key, false) ?: false
             isShowingThumbnailInLockscreenKey -> {
-                isShowingThumbnailInLockscreen = sharedPreferences.getBoolean(key, true)
+                isShowingThumbnailInLockscreen = sharedPreferences?.getBoolean(key, true) ?: true
                 maybeShowSongCoverInLockScreen()
             }
 
@@ -845,7 +847,7 @@ class PlayerService : InvincibleService(), Player.Listener, PlaybackStatsListene
         val audioSink = DefaultAudioSink.Builder()
             .setEnableFloatOutput(false)
             .setEnableAudioTrackPlaybackParams(false)
-            .setOffloadMode(DefaultAudioSink.OFFLOAD_MODE_DISABLED)
+            .setAudioOffloadSupportProvider(DefaultAudioOffloadSupportProvider(applicationContext))
             .setAudioProcessorChain(
                 DefaultAudioProcessorChain(
                     emptyArray(),
