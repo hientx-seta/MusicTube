@@ -24,7 +24,7 @@ fun LocalPlaylistScreen(playlistId: Long) {
         host {
             Scaffold(
                 topIconButtonId = R.drawable.chevron_back,
-                onTopIconButtonClick = pop,
+                onTopIconButtonClick = { pop },
                 tabIndex = 0,
                 onTabChanged = { },
                 tabColumnContent = { Item ->

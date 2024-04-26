@@ -34,7 +34,7 @@ fun BuiltInPlaylistScreen(builtInPlaylist: BuiltInPlaylist) {
         host {
             Scaffold(
                 topIconButtonId = R.drawable.chevron_back,
-                onTopIconButtonClick = pop,
+                onTopIconButtonClick = { pop },
                 tabIndex = tabIndex,
                 onTabChanged = onTabIndexChanged,
                 tabColumnContent = { Item ->

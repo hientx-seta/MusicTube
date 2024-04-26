@@ -178,7 +178,7 @@ fun AlbumScreen(browseId: String) {
 
             Scaffold(
                 topIconButtonId = R.drawable.chevron_back,
-                onTopIconButtonClick = pop,
+                onTopIconButtonClick = { pop },
                 tabIndex = tabIndex,
                 onTabChanged = { tabIndex = it },
                 tabColumnContent = { Item ->

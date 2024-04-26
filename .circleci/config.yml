@@ -9,15 +9,6 @@ jobs:
       - image: cimg/android:2023.04  # Docker image with Android environment
     steps:
       - checkout  # Checks out the source code
-      - run:
-          name: Install Firebase CLI
-          command: |
-            curl -sL https://firebase.tools | bash
-            echo 'export PATH="$PATH:/home/circleci/.npm-global/bin"' >> $BASH_ENV
-            source $BASH_ENV
-#      - run:
-#          name: Authenticate with Firebase
-#          command: firebase login:ci --token $FIREBASE_TOKEN --non-interactive
       - restore_cache:
           keys:
             - gradle-cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
@@ -38,6 +29,12 @@ jobs:
       - store_artifacts:
           path: app/build/outputs/
           destination: build_outputs
+      - run:
+          name: Install Firebase CLI
+          command: |
+            curl -sL https://firebase.tools | bash
+            echo 'export PATH="$PATH:/home/circleci/.npm-global/bin"' >> $BASH_ENV
+            source $BASH_ENV
       - run:
           name: Deploy APK to Firebase
           command: |

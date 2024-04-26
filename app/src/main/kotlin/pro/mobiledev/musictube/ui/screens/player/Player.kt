@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.audiofx.AudioEffect
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.OptIn
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -45,6 +46,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import coil.compose.AsyncImage
 import pro.mobiledev.innertube.models.NavigationEndpoint
 import pro.mobiledev.compose.routing.OnGlobalRoute
@@ -73,6 +75,7 @@ import pro.mobiledev.musictube.utils.thumbnail
 import pro.mobiledev.musictube.utils.toast
 import kotlin.math.absoluteValue
 
+@OptIn(UnstableApi::class)
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
@@ -375,6 +378,7 @@ fun Player(
     }
 }
 
+@UnstableApi
 @ExperimentalAnimationApi
 @Composable
 private fun PlayerMenu(

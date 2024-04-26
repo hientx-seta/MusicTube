@@ -1,10 +1,12 @@
 package pro.mobiledev.musictube.ui.screens.home
 
+import android.content.res.Configuration
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import pro.mobiledev.compose.persist.PersistMapCleanup
 import pro.mobiledev.compose.routing.RouteHandler
 import pro.mobiledev.compose.routing.defaultStacking
@@ -32,6 +34,7 @@ import pro.mobiledev.musictube.ui.screens.searchRoute
 import pro.mobiledev.musictube.ui.screens.searchresult.SearchResultScreen
 import pro.mobiledev.musictube.ui.screens.settings.SettingsScreen
 import pro.mobiledev.musictube.ui.screens.settingsRoute
+import pro.mobiledev.musictube.ui.theme.MusicTubeTheme
 import pro.mobiledev.musictube.utils.homeScreenTabIndexKey
 import pro.mobiledev.musictube.utils.pauseSearchHistoryKey
 import pro.mobiledev.musictube.utils.preferences
@@ -158,5 +161,27 @@ fun HomeScreen(onPlaylistUrl: (String) -> Unit) {
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Preview("BottomBar")
+@Preview("Drawer contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewMenu() {
+    MusicTubeTheme {
+        Scaffold(
+            topIconButtonId = R.drawable.equalizer,
+            onTopIconButtonClick = {  },
+            tabIndex = 1,
+            onTabChanged = {},
+            tabColumnContent = { Item ->
+                Item(0, "Quick picks", R.drawable.sparkles)
+                Item(1, "Songs", R.drawable.musical_notes)
+                Item(2, "Playlists", R.drawable.playlist)
+                Item(3, "Artists", R.drawable.person)
+                Item(4, "Albums", R.drawable.disc)
+            }
+        ){}
     }
 }
