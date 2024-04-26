@@ -5,7 +5,8 @@
 </div>
 
 ## Planning for MusicTube:
-- Change UI with BottomBars
+- Reachitecture application with MVVM using Hilt, Injection, etc.
+- Change UI with NavBottomBar
 - Multi language, songs by location
 - Intergrate youtube floater player and play video on youtube
 - Cache music, video to play offline
